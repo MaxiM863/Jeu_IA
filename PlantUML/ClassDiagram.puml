@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/deployment-diagram
+title <size:20><U+1F916> <color:#darkblue><u>Diagramme de classe Jeu IA</u></color><U+1F916></size>
+
+package IA_MINMAX
+{
+    class RegistrePatient
+    {
+      +AccederInformationPatient()
+      - Diagnostique
+    }
+}
+
+@enduml
