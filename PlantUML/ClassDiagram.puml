@@ -4,22 +4,56 @@ title <size:20><U+1F916> <color:#darkblue><u>Diagramme de classe Jeu IA</u></col
 
 package IA_MINMAX
 {
-    struct TreeNode
-    {
-      + TreeNode: parent
-      + TreeNode[]: childs
-      ---
-      + Position: positionBoard      
-    }
+  struct TreeNode
+  {
+    + TreeNode: parent
+    + TreeNode[]: childs
+    ---
+    + Position: positionBoard      
+  }
 
-    struct Position
-    {
-      char: xPos
-      char: yPos
-    }
+  struct Position
+  {
+    + char: xPos
+    + char: yPos
+  }
+
+  class Tree
+  {
+    + void: Tree()
+    ---
+    - TreeNode: topTree
+  }
+
+  class MinMaxAlgo
+  {
+    + {static} Position: computeHeuristiquePos(TreeNode)
+  }
+
+  class Graphique
+  {
+    + {static} void: AfficherBoard()
+    ---
+    + {static} Position[]: listeJetons
+  }
 
 
-    TreeNode o-- Position
+  TreeNode o-- Position
+  TreeNode -o Tree
+  Position - MinMaxAlgo
+  Tree - MinMaxAlgo
+  MinMaxAlgo - Graphique
 }
+
+package SDL3
+{
+
+  class GraphiqueSDL
+  {
+
+  }
+}
+
+Graphique -- GraphiqueSDL
 
 @enduml
