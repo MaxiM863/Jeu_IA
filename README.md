@@ -10,7 +10,9 @@ Dans le cadre de ma recherche d'emplois de 2025, suite à ma diplômation.
 
 ## Visuels
 
-![](PNG/Diagramme_Deploiement.png)
+![](PlantUML/UseSase.png)
+---
+![](PlantUML/ClassDiagram.png)
 
 ## Usage
 
