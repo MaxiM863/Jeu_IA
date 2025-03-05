@@ -1,0 +1,25 @@
+@startuml UC_JEU_IA
+'https://plantuml.com/use-case-diagram
+
+title <size:20><U+1F916>  <color:#darkblue><u>USE CASE JEU IA</u> <U+1F916></color></size>
+
+left to right direction
+
+skinparam usecase {
+    BackgroundColor DarkSeaGreen
+    BorderColor DarkSlateGray
+    ArrowColor Olive
+}
+
+Actor Joueur as J
+
+rectangle "Jeu IA" #LightBlue {
+   
+   (Jouer un coup) as (JUC)
+   (Quitter l'application) as (QAPP)
+
+   J -- JUC
+   J -- QAPP
+}
+
+@enduml
