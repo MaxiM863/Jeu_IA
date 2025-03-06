@@ -53,7 +53,7 @@ long MinMaxAlgo::runAlgo(TreeNode* node, int depth, bool isMaximizing, long alph
 
             alpha = std::max(alpha, eval);
             
-            if(beta <= alpha)
+            if(beta < alpha)
             {
                 break;
             }                
@@ -77,7 +77,7 @@ long MinMaxAlgo::runAlgo(TreeNode* node, int depth, bool isMaximizing, long alph
 
             beta = std::min(beta, eval);
             
-            if(beta <= alpha)
+            if(beta < alpha)
             {
                 break;
             }                
