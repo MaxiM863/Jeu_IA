@@ -15,6 +15,8 @@ struct TreeNode
     std::vector<TreeNode*> childs;
 
     Position positionBoard;
+
+    int valeurChild;
 };
 
 #endif

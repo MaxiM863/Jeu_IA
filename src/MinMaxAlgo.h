@@ -11,13 +11,16 @@ public:
 
 public:
 
-    long runAlgo(TreeNode* node, int depth, bool isMaximizing, long alpha, long beta);
+    Position minMaxRun(Tree* tree, std::vector<Position> botPlayed, std::vector<Position> plyPlayed);
+
     void SetDataTree(Tree* treeData);
 
 private:
 
-    long utilityFunction(TreeNode* node);
-    bool isTerminal(TreeNode* node);
+    long runAlgo(TreeNode* node, int depth, bool isMaximizing, long alpha, long beta, std::vector<Position> botPlayed, std::vector<Position> plyPlayed);
+    
+    long utilityFunction(TreeNode* node, std::vector<Position> botPlayed, std::vector<Position> plyPlayed);
+    bool isTerminal(TreeNode* node, std::vector<Position> botPlayed, std::vector<Position> plyPlayed);
 
 private:
 
