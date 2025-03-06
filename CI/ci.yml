@@ -11,10 +11,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    
+
     - name: Build project
-      run: |
-        make
+      run: mkdir build && cd build && cmake . && cmake --build .
 
     #- name: Run tests
     #  run: |
