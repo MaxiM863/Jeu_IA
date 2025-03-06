@@ -22,9 +22,11 @@ MinMaxAlgo::~MinMaxAlgo()
 
 Position MinMaxAlgo::minMaxRun(Tree* tree, std::vector<Position> botPlayed, std::vector<Position> plyPlayed)
 {
-    TreeNode tmpNode;
+    TreeNode* tmpNode = tree->getTopTree();
 
-    runAlgo(tree->getTopTree(), tree->getTreeDepth(), true, LONG_MIN, LONG_MAX, botPlayed, plyPlayed);
+    runAlgo(tmpNode, tree->getTreeDepth(), true, LONG_MIN, LONG_MAX, botPlayed, plyPlayed);
+
+    return tmpNode->positionBoard;
 }
 
 long MinMaxAlgo::runAlgo(TreeNode* node, int depth, bool isMaximizing, long alpha, long beta, std::vector<Position> botPlayed, std::vector<Position> plyPlayed)
