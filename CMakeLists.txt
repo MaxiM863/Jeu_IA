@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 add_subdirectory(src)
-add_subdirectory(vendor/SDL-main)
+add_subdirectory(vendor/SDL-main/SDL)
 
 add_library(vendor INTERFACE)
 target_link_libraries(vendor INTERFACE SDL3::SDL3)
