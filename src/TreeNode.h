@@ -1,3 +1,6 @@
+#ifndef TREENODE
+#define TREENODE
+
 #include<vector>
 
 struct Position
@@ -13,3 +16,5 @@ struct TreeNode
 
     Position positionBoard;
 };
+
+#endif
