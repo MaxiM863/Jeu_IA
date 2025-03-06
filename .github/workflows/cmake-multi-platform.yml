@@ -52,7 +52,7 @@ jobs:
       run: |
         mkdir debug
         cd debug
-        ${{ matrix.cmake-path }}cmake -E env ${{ matrix.cmake-init-env }} ${{ matrix.cmake-path }}cmake ${{ matrix.cmake-args }} -DCMAKE_BUILD_TYPE=Debug -Werror=dev ..
+        ${{ matrix.cmake-path }}cmake -E env ${{ matrix.cmake-init-env }} ${{ matrix.cmake-path }}cmake ${{ matrix.cmake-args }} -DCMAKE_BUILD_TYPE=Debug  -DCMAKE_SYSTEM_VERSION=10.0.26100.0 -Werror=dev ..
         ${{ matrix.cmake-path }}cmake --build . --config Debug ${{ matrix.build-args }}
 
     - name: Build in release mode
