@@ -29,6 +29,10 @@ Position MinMaxAlgo::minMaxRun(Tree* tree, std::vector<Position> botPlayed, std:
     return tmpNode->positionBoard;
 }
 
+void MinMaxAlgo::SetDataTree(Tree *treeData)
+{
+}
+
 long MinMaxAlgo::testUtility(TreeNode *node, std::vector<Position> played)
 {
     return MinMaxAlgo::utilityFunction(node, played);

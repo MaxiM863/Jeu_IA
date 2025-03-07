@@ -9,7 +9,9 @@ int main(int argc, char *argv[]){
 
         bool res = tests.run();
 
-        return res;
+        if(res == true) return 0;
+
+        return 1;
     }
 
     if(!GraphiqueSDL::initialize(6, 6))

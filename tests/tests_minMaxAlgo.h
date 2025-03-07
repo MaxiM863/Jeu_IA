@@ -26,7 +26,7 @@ private:
 
         std::vector<Position> played;
 
-        if(algo.testUtility(node, played) != 0) res = false;
+        if(algo.testUtility(node, played) != 0L) res = false;
         
         return res;
     }

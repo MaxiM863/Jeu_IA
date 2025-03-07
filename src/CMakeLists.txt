@@ -1,7 +1,5 @@
 add_executable(${PROJECT_NAME})
-target_sources(${PROJECT_NAME} PRIVATE main.cpp)
-
-#add_test(NAME Utility COMMAND ${PROJECT_NAME} tests)
+target_sources(${PROJECT_NAME} PRIVATE main.cpp MinMaxAlgo.cpp)
 
 include(FetchContent)
 
