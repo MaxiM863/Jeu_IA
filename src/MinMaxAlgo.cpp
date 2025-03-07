@@ -69,7 +69,7 @@ long MinMaxAlgo::runAlgo(TreeNode* node, int depth, bool isMaximizing, long alph
         
     if(isMaximizing)
     {
-        long max_eval = LONG_MIN;
+        long max_eval = INT32_MIN;
 
         for(int i = 0; i < node->childs.size(); i++)
         {
@@ -93,7 +93,7 @@ long MinMaxAlgo::runAlgo(TreeNode* node, int depth, bool isMaximizing, long alph
     }
     else
     {
-        long min_eval = LONG_MAX;
+        long min_eval = INT32_MAX;
 
         for(int i = 0; i < node->childs.size(); i++)
         {
