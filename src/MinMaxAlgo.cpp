@@ -31,10 +31,14 @@ Position MinMaxAlgo::minMaxRun(Tree* tree, std::vector<Position> botPlayed, std:
 
 long MinMaxAlgo::runAlgo(TreeNode* node, int depth, bool isMaximizing, long alpha, long beta, std::vector<Position> botPlayed, std::vector<Position> plyPlayed)
 {
-    
-    if(isTerminal(node, botPlayed) || depth == 0)
+    if(node->parent != nullptr)
     {
-        return MinMaxAlgo::utilityFunction(node, botPlayed) - MinMaxAlgo::utilityFunction(nullptr, plyPlayed);
+        long botPoints = MinMaxAlgo::utilityFunction(node, botPlayed);
+        
+        if(isTerminal(botPoints) || depth == 0)
+        {
+            return botPoints - MinMaxAlgo::utilityFunction(nullptr, plyPlayed);
+        }
     }
         
     if(isMaximizing)
@@ -133,10 +137,20 @@ long MinMaxAlgo::utilityFunction(TreeNode* node, std::vector<Position> Played)
     return points;
 }
 
-bool MinMaxAlgo::isTerminal(TreeNode* node, std::vector<Position> botPlayed)
+bool MinMaxAlgo::isTerminal(long botPoints)
 {
+    bool test = true;
 
+    if(MAXHITS == 4)
+    {
+        if(botPoints < 15625L) test = false;
+    }
+    else if(MAXHITS == 5)
+    {
+        if(botPoints < 390625L) test = false;
+    }
 
+    return test;
 }
 
 void MinMaxAlgo::recursiveDirection(long &points, Position pos, Position direction, std::vector<Position> played)
@@ -159,11 +173,11 @@ long MinMaxAlgo::calculatePoints(int hits)
 
     if(hits == 0)      points += 0L;
     else if(hits == 1) points += 1L;
-    else if(hits == 2) points += 10L;
-    else if(hits == 3) points += 100L;
-    else if(hits == 4) points += 1000L;
-    else if(hits == 5) points += 10000L;
-    else if(hits == 6) points += 100000L;
+    else if(hits == 2) points += 25L;
+    else if(hits == 3) points += 625L;
+    else if(hits == 4) points += 15625L;
+    else if(hits == 5) points += 390625L;
+    else if(hits == 6) points += 9765625L;
 
     return points;
 }
