@@ -33,12 +33,29 @@ long MinMaxAlgo::runAlgo(TreeNode* node, int depth, bool isMaximizing, long alph
 {
     if(node->parent != nullptr)
     {
-        long botPoints = MinMaxAlgo::utilityFunction(node, botPlayed);
-        
-        if(isTerminal(botPoints) || depth == 0)
+        long botPoints;
+        long plyPoints;
+
+        if(isMaximizing)
         {
-            return botPoints - MinMaxAlgo::utilityFunction(nullptr, plyPlayed);
+            botPoints = MinMaxAlgo::utilityFunction(node, botPlayed);
+            plyPoints = MinMaxAlgo::utilityFunction(nullptr, plyPlayed);
+            
+            if(isTerminal(botPoints) || depth == 0)
+            {
+                return botPoints - plyPoints;
+            }
         }
+        else
+        {
+            botPoints = MinMaxAlgo::utilityFunction(nullptr, botPlayed);
+            plyPoints = MinMaxAlgo::utilityFunction(node, plyPlayed);
+            
+            if(isTerminal(plyPoints) || depth == 0)
+            {
+                return botPoints - plyPoints;
+            }
+        }       
     }
         
     if(isMaximizing)
