@@ -17,6 +17,8 @@ public:
 
     void SetDataTree(Tree* treeData);
 
+    long testUtility(TreeNode* node, std::vector<Position> played);
+
 private:
 
     long runAlgo(TreeNode* node, int depth, bool isMaximizing, long alpha, long beta, std::vector<Position> botPlayed, std::vector<Position> plyPlayed);
