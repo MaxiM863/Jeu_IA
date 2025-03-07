@@ -8,7 +8,7 @@ public:
     {
         bool result = true;
 
-        if(!test_Utility_1()) result = false;
+        if(!tests_minMaxAlgo::test_Utility_1()) result = false;
         
 
         return result;
@@ -16,6 +16,10 @@ public:
 
 private:
 
-    static bool test_Utility_1();
+    static bool test_Utility_1()
+    {
+
+        return true;
+    }
 
 };
