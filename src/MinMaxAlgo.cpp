@@ -24,7 +24,7 @@ Position MinMaxAlgo::minMaxRun(Tree* tree, std::vector<Position> botPlayed, std:
 {
     TreeNode* tmpNode = tree->getTopTree();
 
-    runAlgo(tmpNode, tree->getTreeDepth(), true, LONG_MIN, LONG_MAX, botPlayed, plyPlayed);
+    runAlgo(tmpNode, tree->getTreeDepth(), true, INT32_MIN, INT32_MAX, botPlayed, plyPlayed);
 
     return tmpNode->positionBoard;
 }
