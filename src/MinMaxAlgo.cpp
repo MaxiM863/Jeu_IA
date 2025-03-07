@@ -32,9 +32,9 @@ Position MinMaxAlgo::minMaxRun(Tree* tree, std::vector<Position> botPlayed, std:
 long MinMaxAlgo::runAlgo(TreeNode* node, int depth, bool isMaximizing, long alpha, long beta, std::vector<Position> botPlayed, std::vector<Position> plyPlayed)
 {
     
-    if(isTerminal(node, botPlayed, plyPlayed) || depth == 0)
+    if(isTerminal(node, botPlayed) || depth == 0)
     {
-        return MinMaxAlgo::utilityFunction(node, botPlayed, plyPlayed);
+        return MinMaxAlgo::utilityFunction(node, botPlayed) - MinMaxAlgo::utilityFunction(nullptr, plyPlayed);
     }
         
     if(isMaximizing)
@@ -53,7 +53,7 @@ long MinMaxAlgo::runAlgo(TreeNode* node, int depth, bool isMaximizing, long alph
 
             alpha = std::max(alpha, eval);
             
-            if(beta < alpha)
+            if(beta <= alpha)
             {
                 break;
             }                
@@ -77,7 +77,7 @@ long MinMaxAlgo::runAlgo(TreeNode* node, int depth, bool isMaximizing, long alph
 
             beta = std::min(beta, eval);
             
-            if(beta < alpha)
+            if(beta <= alpha)
             {
                 break;
             }                
@@ -87,14 +87,83 @@ long MinMaxAlgo::runAlgo(TreeNode* node, int depth, bool isMaximizing, long alph
     }
 }
 
-long MinMaxAlgo::utilityFunction(TreeNode* node, std::vector<Position> botPlayed, std::vector<Position> plyPlayed)
+long MinMaxAlgo::utilityFunction(TreeNode* node, std::vector<Position> Played)
+{
+
+    long points = 0L;
+    long hits = 0;
+
+    if(node != nullptr)
+    {
+        while(node->parent != nullptr)
+        {
+        
+            Played.push_back(node->positionBoard);
+            node = node->parent;
+        }
+    }
+
+    for(int i = 0; i < Played.size(); i++)
+    {
+        recursiveDirection(hits, Played.at(i), Position(1, 0), Played);
+        points += calculatePoints(hits);
+        hits = 0;
+        recursiveDirection(points, Played.at(i), Position(-1, 0), Played);
+        points += calculatePoints(hits);
+        hits = 0;
+        recursiveDirection(points, Played.at(i), Position(0, 1), Played);
+        points += calculatePoints(hits);
+        hits = 0;
+        recursiveDirection(points, Played.at(i), Position(0, -1), Played);
+        points += calculatePoints(hits);
+        hits = 0;
+        recursiveDirection(points, Played.at(i), Position(1, 1), Played);
+        points += calculatePoints(hits);
+        hits = 0;
+        recursiveDirection(points, Played.at(i), Position(-1, 1), Played);
+        points += calculatePoints(hits);
+        hits = 0;
+        recursiveDirection(points, Played.at(i), Position(1, -1), Played);
+        points += calculatePoints(hits);
+        hits = 0;
+        recursiveDirection(points, Played.at(i), Position(-1, -1), Played);
+        points += calculatePoints(hits);
+    }
+
+    return points;
+}
+
+bool MinMaxAlgo::isTerminal(TreeNode* node, std::vector<Position> botPlayed)
 {
 
 
 }
 
-bool MinMaxAlgo::isTerminal(TreeNode* node, std::vector<Position> botPlayed, std::vector<Position> plyPlayed)
+void MinMaxAlgo::recursiveDirection(long &points, Position pos, Position direction, std::vector<Position> played)
 {
+    Position newPos = Position(pos.xPos + direction.xPos, pos.yPos + direction.yPos);
 
+    for(int i = 0; i < played.size(); i++)
+    {
+        if(played.at(i).xPos == newPos.xPos && played.at(i).yPos == newPos.yPos)
+        {
+            points++;
+            recursiveDirection(points, newPos, direction, played);
+        }
+    }
+}
 
+long MinMaxAlgo::calculatePoints(int hits)
+{
+    long points = 0L;
+
+    if(hits == 0)      points += 0L;
+    else if(hits == 1) points += 1L;
+    else if(hits == 2) points += 10L;
+    else if(hits == 3) points += 100L;
+    else if(hits == 4) points += 1000L;
+    else if(hits == 5) points += 10000L;
+    else if(hits == 6) points += 100000L;
+
+    return points;
 }

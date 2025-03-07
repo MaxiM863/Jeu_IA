@@ -5,6 +5,7 @@
 
 struct Position
 {
+    Position(int x, int y) { xPos = x; yPos = y; }
     int xPos;
     int yPos;
 };
