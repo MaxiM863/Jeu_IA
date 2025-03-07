@@ -1,3 +1,5 @@
+#include<stdint.h>
+
 #include "MinMaxAlgo.h"
 
 MinMaxAlgo::MinMaxAlgo(Tree* treeData)
