@@ -137,29 +137,15 @@ long MinMaxAlgo::utilityFunction(TreeNode* node, std::vector<Position> Played)
 
     for(int i = 0; i < Played.size(); i++)
     {
-        recursiveDirection(hits, Played.at(i), Position(1, 0), Played);
+        recursiveDirection(++hits, Played.at(i), Position(1, 0), Played);
         points += calculatePoints(hits);
         hits = 0;
-        recursiveDirection(points, Played.at(i), Position(-1, 0), Played);
+        recursiveDirection(++hits, Played.at(i), Position(0, 1), Played);
         points += calculatePoints(hits);
         hits = 0;
-        recursiveDirection(points, Played.at(i), Position(0, 1), Played);
+        recursiveDirection(++hits, Played.at(i), Position(1, 1), Played);
         points += calculatePoints(hits);
         hits = 0;
-        recursiveDirection(points, Played.at(i), Position(0, -1), Played);
-        points += calculatePoints(hits);
-        hits = 0;
-        recursiveDirection(points, Played.at(i), Position(1, 1), Played);
-        points += calculatePoints(hits);
-        hits = 0;
-        recursiveDirection(points, Played.at(i), Position(-1, 1), Played);
-        points += calculatePoints(hits);
-        hits = 0;
-        recursiveDirection(points, Played.at(i), Position(1, -1), Played);
-        points += calculatePoints(hits);
-        hits = 0;
-        recursiveDirection(points, Played.at(i), Position(-1, -1), Played);
-        points += calculatePoints(hits);
     }
 
     return points;
@@ -171,11 +157,11 @@ bool MinMaxAlgo::isTerminal(long botPoints)
 
     if(MAXHITS == 4)
     {
-        if(botPoints < 15625L) test = false;
+        if(botPoints < 16284L) test = false;
     }
     else if(MAXHITS == 5)
     {
-        if(botPoints < 390625L) test = false;
+        if(botPoints < 406911L) test = false;
     }
 
     return test;
