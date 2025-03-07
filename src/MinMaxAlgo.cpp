@@ -28,7 +28,7 @@ Position MinMaxAlgo::minMaxRun(Tree* tree, std::vector<Position> botPlayed, std:
 
     runAlgo(tmpNode, tree->getTreeDepth(), true, INT32_MIN, INT32_MAX, botPlayed, plyPlayed);
 
-    return tmpNode->positionBoard;
+    return tmpNode->childs.at(tmpNode->valeurChild)->positionBoard;
 }
 
 void MinMaxAlgo::SetDataTree(Tree *treeData)

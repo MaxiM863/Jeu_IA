@@ -15,6 +15,9 @@ public:
         if(!test_Utility_5()) result = false;
         if(!test_Utility_6()) result = false;
         if(!test_Utility_7()) result = false;
+        if(!test_Utility_8()) result = false;
+
+        if(!test_Algo_1()) result = false;
 
         return result;
     }
@@ -169,6 +172,62 @@ private:
         long test = algo.testUtility(node, played);
 
         if(test != 406911L) res = false;
+        
+        return res;
+    }
+
+    bool test_Utility_8()
+    {
+        MinMaxAlgo algo;
+
+        bool res = true;
+        
+        TreeNode* node = new TreeNode(nullptr, std::vector<TreeNode*>(), Position(5, 5));
+
+        std::vector<Position> played;
+
+        played.push_back(Position(1, 1));
+        played.push_back(Position(2, 2));
+        played.push_back(Position(3, 3));
+
+        node->parent = new TreeNode(new TreeNode(nullptr, std::vector<TreeNode*>(), Position(-1, -1)), std::vector<TreeNode*>(), Position(4, 4));
+
+        // 390625*1 + 15625*1 + 625*1 + 25*1 + 4*2 + 3
+        
+        long test = algo.testUtility(node, played);
+
+        if(test != 406911L) res = false;
+
+        delete(node->parent->parent);
+        delete(node->parent);
+        delete(node);
+        
+        return res;
+    }
+
+    bool test_Algo_1()
+    {
+        MinMaxAlgo algo;
+
+        bool res = true;
+        
+        Tree* tree = new Tree();
+
+        std::vector<Position> played;
+
+        played.push_back(Position(1, 1));
+        played.push_back(Position(2, 2));
+
+        std::vector<Position> playedPly;
+
+        playedPly.push_back(Position(0, 0));
+        playedPly.push_back(Position(3, 3));
+        
+        
+
+        long test = algo.minMaxRun()
+
+        if() res = false;
         
         return res;
     }
