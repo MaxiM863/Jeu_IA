@@ -5,6 +5,7 @@
 
 struct Position
 {
+    Position(int x, int y) { xPos = x; yPos = y; }
     int xPos;
     int yPos;
 };
@@ -12,9 +13,11 @@ struct Position
 struct TreeNode
 {
     TreeNode* parent;
-    std::vector<TreeNode> childs;
+    std::vector<TreeNode*> childs;
 
     Position positionBoard;
+
+    int valeurChild;
 };
 
 #endif
