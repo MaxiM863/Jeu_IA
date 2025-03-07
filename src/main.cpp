@@ -1,12 +1,13 @@
 #include "GraphiqueSDL.h"
-#include "../tests/tests_minMaxAlgo.h"
+#include "tests_minMaxAlgo.h"
 
 int main(int argc, char *argv[]){
 
     if(argc > 1)
     {
+        tests_minMaxAlgo tests;
 
-        bool res = tests_minMaxAlgo::run();
+        bool res = tests.run();
 
         return res;
     }
