@@ -30,5 +30,4 @@ private:
         
         return res;
     }
-
 };
