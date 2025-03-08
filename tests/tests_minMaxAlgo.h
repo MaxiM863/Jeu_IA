@@ -261,4 +261,32 @@ private:
         
         return res;
     }
+
+    bool test_Algo_3()
+    {
+        MinMaxAlgo algo;
+
+        bool res = true;
+        
+        Tree tree(6);
+
+        std::vector<Position> played;
+
+        played.push_back(Position(1, 1));
+        played.push_back(Position(0, 3));
+
+        std::vector<Position> playedPly;
+
+        playedPly.push_back(Position(2, 2));
+        playedPly.push_back(Position(4, 4));
+        
+        tree.addLevel(played, playedPly);
+        tree.addLevel(played, playedPly);
+
+        Position posOptimal = algo.minMaxRun(&tree, played, playedPly);        
+
+        if(posOptimal.xPos != 3 || posOptimal.yPos != 3) res = false;
+        
+        return res;
+    }
 };
