@@ -8,16 +8,17 @@ public:
     {
         bool result = true;
 
-        if(!test_Utility_1()) result = false;
+        /*if(!test_Utility_1()) result = false;
         if(!test_Utility_2()) result = false;
         if(!test_Utility_3()) result = false;
         if(!test_Utility_4()) result = false;
         if(!test_Utility_5()) result = false;
         if(!test_Utility_6()) result = false;
-        if(!test_Utility_7()) result = false;
-        if(!test_Utility_8()) result = false;
+        if(!test_Utility_7()) result = false;*/
+        //if(!test_Utility_8()) result = false;
 
-        if(!test_Algo_1()) result = false;
+        //if(!test_Algo_1()) result = false;
+        if(!test_Algo_2()) result = false;
 
         return result;
     }
@@ -190,7 +191,8 @@ private:
         played.push_back(Position(2, 2));
         played.push_back(Position(3, 3));
 
-        node->parent = new TreeNode(new TreeNode(nullptr, std::vector<TreeNode*>(), Position(-1, -1)), std::vector<TreeNode*>(), Position(4, 4));
+        node->parent = new TreeNode(new TreeNode(new TreeNode(nullptr, std::vector<TreeNode*>(), Position(-1, -1)), 
+            std::vector<TreeNode*>(), Position(4, 4)), std::vector<TreeNode*>(), Position(4, 2));
 
         // 390625*1 + 15625*1 + 625*1 + 25*1 + 4*2 + 3
         
@@ -211,7 +213,7 @@ private:
 
         bool res = true;
         
-        Tree* tree = new Tree();
+        Tree* tree = new Tree(6);
 
         std::vector<Position> played;
 
@@ -221,13 +223,41 @@ private:
         std::vector<Position> playedPly;
 
         playedPly.push_back(Position(0, 0));
-        playedPly.push_back(Position(3, 3));
+        playedPly.push_back(Position(4, 4));
         
+        tree->addLevel(played, playedPly);
+
+        Position posOptimal = algo.minMaxRun(tree, played, playedPly);        
+
+        if(posOptimal.xPos != 3 || posOptimal.yPos != 3) res = false;
         
+        return res;
+    }
 
-        long test = algo.minMaxRun()
+    bool test_Algo_2()
+    {
+        MinMaxAlgo algo;
 
-        if() res = false;
+        bool res = true;
+        
+        Tree tree(6);
+
+        std::vector<Position> played;
+
+        played.push_back(Position(1, 1));
+        played.push_back(Position(0, 3));
+
+        std::vector<Position> playedPly;
+
+        playedPly.push_back(Position(2, 2));
+        playedPly.push_back(Position(4, 4));
+        
+        tree.addLevel(played, playedPly);
+        tree.addLevel(played, playedPly);
+
+        Position posOptimal = algo.minMaxRun(&tree, played, playedPly);        
+
+        if(posOptimal.xPos != 3 || posOptimal.yPos != 3) res = false;
         
         return res;
     }

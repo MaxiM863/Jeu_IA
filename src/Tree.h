@@ -13,7 +13,7 @@ class Tree {
         void addLevel(std::vector<Position> botPlayed, std::vector<Position> plyPlayed)
         {
 
-            recursiveAddNode(top, botPlayed, plyPlayed);
+            recursiveAddNode(top, botPlayed, plyPlayed, 0);
         }
 
         int getTreeDepth() 
@@ -39,11 +39,28 @@ class Tree {
             }
         }
 
-        void recursiveAddNode(TreeNode* actual, std::vector<Position> botPlayed, std::vector<Position> plyPlayed)
+        void recursiveAddNode(TreeNode* actual, std::vector<Position> botPlayed, std::vector<Position> plyPlayed, int level)
         {
 
             if(actual->childs.size() == 0)
             {
+
+                TreeNode* tmpActual = actual;
+
+                while(tmpActual->parent != nullptr)
+                {
+                    if(level % 2 == 0)
+                    {
+                        plyPlayed.push_back(tmpActual->positionBoard);
+                    }
+                    else
+                    {
+                        botPlayed.push_back(tmpActual->positionBoard);
+                    }
+
+                    tmpActual = tmpActual->parent;
+                }
+
                 for(int i = 0; i < boardSize; i++)
                 {
                     for(int j = 0; j < boardSize; j++)
@@ -83,7 +100,7 @@ class Tree {
             {
                 for(int i = 0; i < actual->childs.size(); i++)
                 {
-                    recursiveAddNode(actual->childs.at(i), botPlayed, plyPlayed);
+                    recursiveAddNode(actual->childs.at(i), botPlayed, plyPlayed, level + 1);
                 }
             }
         }

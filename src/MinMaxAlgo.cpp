@@ -37,7 +37,7 @@ void MinMaxAlgo::SetDataTree(Tree *treeData)
 
 long MinMaxAlgo::testUtility(TreeNode *node, std::vector<Position> played)
 {
-    return MinMaxAlgo::utilityFunction(node, played);
+    return MinMaxAlgo::utilityFunction(node, played, true, true);
 }
 
 long MinMaxAlgo::runAlgo(TreeNode* node, int depth, bool isMaximizing, long alpha, long beta, std::vector<Position> botPlayed, std::vector<Position> plyPlayed)
@@ -47,10 +47,10 @@ long MinMaxAlgo::runAlgo(TreeNode* node, int depth, bool isMaximizing, long alph
         long botPoints;
         long plyPoints;
 
-        if(isMaximizing)
+        if(!isMaximizing)
         {
-            botPoints = MinMaxAlgo::utilityFunction(node, botPlayed);
-            plyPoints = MinMaxAlgo::utilityFunction(nullptr, plyPlayed);
+            botPoints = MinMaxAlgo::utilityFunction(node, botPlayed, !isMaximizing, true);
+            plyPoints = MinMaxAlgo::utilityFunction(nullptr, plyPlayed, !isMaximizing, false);
             
             if(isTerminal(botPoints) || depth == 0)
             {
@@ -59,8 +59,8 @@ long MinMaxAlgo::runAlgo(TreeNode* node, int depth, bool isMaximizing, long alph
         }
         else
         {
-            botPoints = MinMaxAlgo::utilityFunction(nullptr, botPlayed);
-            plyPoints = MinMaxAlgo::utilityFunction(node, plyPlayed);
+            botPoints = MinMaxAlgo::utilityFunction(nullptr, botPlayed, !isMaximizing, true);
+            plyPoints = MinMaxAlgo::utilityFunction(node, plyPlayed, !isMaximizing, false);
             
             if(isTerminal(plyPoints) || depth == 0)
             {
@@ -75,7 +75,7 @@ long MinMaxAlgo::runAlgo(TreeNode* node, int depth, bool isMaximizing, long alph
 
         for(int i = 0; i < node->childs.size(); i++)
         {
-            long eval = MinMaxAlgo::runAlgo(node->childs.at(i), false, depth - 1, alpha, beta, botPlayed, plyPlayed);
+            long eval = MinMaxAlgo::runAlgo(node->childs.at(i), depth - 1, false, alpha, beta, botPlayed, plyPlayed);
 
             if(max_eval < eval) 
             {
@@ -99,7 +99,7 @@ long MinMaxAlgo::runAlgo(TreeNode* node, int depth, bool isMaximizing, long alph
 
         for(int i = 0; i < node->childs.size(); i++)
         {
-            long eval = MinMaxAlgo::runAlgo(node->childs.at(i), true, depth - 1, alpha, beta, botPlayed, plyPlayed);
+            long eval = MinMaxAlgo::runAlgo(node->childs.at(i), depth - 1, true, alpha, beta, botPlayed, plyPlayed);
 
             if(min_eval > eval) 
             {
@@ -119,7 +119,7 @@ long MinMaxAlgo::runAlgo(TreeNode* node, int depth, bool isMaximizing, long alph
     }
 }
 
-long MinMaxAlgo::utilityFunction(TreeNode* node, std::vector<Position> Played)
+long MinMaxAlgo::utilityFunction(TreeNode* node, std::vector<Position> Played, bool isMaximizing, bool isBot)
 {
 
     long points = 0L;
@@ -130,7 +130,17 @@ long MinMaxAlgo::utilityFunction(TreeNode* node, std::vector<Position> Played)
         while(node->parent != nullptr)
         {
         
-            Played.push_back(node->positionBoard);
+            if(isMaximizing && isBot)
+            {
+                Played.push_back(node->positionBoard);
+            }
+            
+            if(!isMaximizing && !isBot)
+            {
+                Played.push_back(node->positionBoard);
+            }
+            
+            isMaximizing = !isMaximizing;
             node = node->parent;
         }
     }

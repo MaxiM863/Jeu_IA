@@ -20,6 +20,7 @@ struct TreeNode
         parent = _parent;
         childs = _childs;
         positionBoard = position;
+        valeurChild = 0;
     }
 
     TreeNode* parent;
