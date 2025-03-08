@@ -8,16 +8,16 @@ public:
     {
         bool result = true;
 
-        /*if(!test_Utility_1()) result = false;
+        if(!test_Utility_1()) result = false;
         if(!test_Utility_2()) result = false;
         if(!test_Utility_3()) result = false;
         if(!test_Utility_4()) result = false;
         if(!test_Utility_5()) result = false;
         if(!test_Utility_6()) result = false;
-        if(!test_Utility_7()) result = false;*/
-        //if(!test_Utility_8()) result = false;
+        if(!test_Utility_7()) result = false;
+        if(!test_Utility_8()) result = false;
 
-        //if(!test_Algo_1()) result = false;
+        if(!test_Algo_1()) result = false;
         if(!test_Algo_2()) result = false;
 
         return result;
