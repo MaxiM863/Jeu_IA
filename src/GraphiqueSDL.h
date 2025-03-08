@@ -63,7 +63,7 @@ public:
 
         //**************************************************************
 
-
+        drawBoard(renderer);
 
         //**************************************************************
         
@@ -85,7 +85,7 @@ public:
 
     private:
 
-        void drawCircle(int xx, int yy, int radius, SDL_Renderer* renderer) {
+        static void drawCircle(int xx, int yy, int radius, SDL_Renderer* renderer) {
             
             for(int i = 0; i < 360; i ++) {
         
@@ -99,7 +99,7 @@ public:
             }
         }
 
-        void drawBoard(SDL_Renderer *renderer)
+        static void drawBoard(SDL_Renderer *renderer)
         {            
             for(int i = 0;  i < 6; i++) {
 
