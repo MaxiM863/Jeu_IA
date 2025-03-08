@@ -23,7 +23,7 @@ private:
 
     long runAlgo(TreeNode* node, int depth, bool isMaximizing, long alpha, long beta, std::vector<Position> botPlayed, std::vector<Position> plyPlayed);
     
-    long utilityFunction(TreeNode* node, std::vector<Position> Played);
+    long utilityFunction(TreeNode* node, std::vector<Position> Played, bool isMaximizing, bool isBot);
     bool isTerminal(long botPoints);
 
     void recursiveDirection(long& points, Position pos, Position direction, std::vector<Position> botPlayed);
