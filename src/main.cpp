@@ -21,9 +21,37 @@ int main(int argc, char *argv[]){
 
     bool jeuActif = true;
 
+    MinMaxAlgo algo;
+
+    Tree tree(6);
+
+    std::vector<Position> botPos;
+    std::vector<Position> plyPos;
+
+    bool plyHasPlayed = false;
+
     while(jeuActif)
     {
-        jeuActif = GraphiqueSDL::afficherUnFrame();
+
+        if(plyHasPlayed)
+        {
+            plyHasPlayed = false;
+            
+            Position pos = algo.minMaxRun(&tree, botPos, plyPos);
+            
+            botPos.push_back(pos);
+        }
+        else
+        {
+            Position clickedPos(-1, -1);
+
+            jeuActif = GraphiqueSDL::afficherUnFrame(clickedPos);
+
+            if(clickedPos.xPos != -1)
+            {
+                plyHasPlayed = true;
+            }
+        }        
     }
 
     return 0;

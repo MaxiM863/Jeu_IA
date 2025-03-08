@@ -42,7 +42,7 @@ public:
         return true;
     }
 
-    static bool afficherUnFrame() 
+    static bool afficherUnFrame(Position& clickedPos) 
     {
         SDL_Event e;
 
@@ -53,7 +53,7 @@ public:
                     return false;
                     break;
                 case SDL_EVENT_MOUSE_BUTTON_DOWN:
-                                        
+                    clickedPos = Position(e.button.x / (_width/50), e.button.y / (_height/50));           
                     break;
             }
         }
