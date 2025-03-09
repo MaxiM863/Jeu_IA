@@ -125,7 +125,9 @@ int main(int argc, char *argv[]){
                     }
                 }                
             }
-        }        
+        }    
+        
+        if(botPos.size() + plyPos.size() == BOARDSIZE*BOARDSIZE) jeuActif = false;
     }
 
     return 0;
