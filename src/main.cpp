@@ -1,8 +1,9 @@
 #include "GraphiqueSDL.h"
 #include "tests_minMaxAlgo.h"
+#include <time.h>
 
-#define BOARDSIZE 10
-#define DIFFICULTY 2
+#define BOARDSIZE 6
+#define DIFFICULTY 3
 
 int main(int argc, char *argv[]){
 
@@ -29,7 +30,26 @@ int main(int argc, char *argv[]){
     std::vector<Position> botPos;
     std::vector<Position> plyPos;
 
-    bool plyHasPlayed = true;
+    bool plyHasPlayed = false;
+
+    srand(time(0));
+
+    Position pos = Position(rand()%BOARDSIZE, rand()%BOARDSIZE);
+    
+    botPos.push_back(pos);
+
+    Position clickedPos(-1, -1);
+
+    GraphiqueSDL::afficherUnFrame(clickedPos);
+
+    GraphiqueSDL::putBotData(pos);
+
+    if(algo.isFinished(botPos))
+    {
+
+        jeuActif = false;
+        GraphiqueSDL::afficherFin(true);
+    }
 
     while(jeuActif)
     {

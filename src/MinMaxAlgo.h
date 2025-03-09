@@ -1,6 +1,6 @@
 #include "Tree.h"
 
-#define MAXHITS 5
+#define MAXHITS 4
 
 class MinMaxAlgo {
 
