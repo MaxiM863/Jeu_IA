@@ -1,4 +1,5 @@
 #include<vector>
+#include<math.h>
 
 #include "SDL3/SDL.h"
 
@@ -53,7 +54,7 @@ public:
                     return false;
                     break;
                 case SDL_EVENT_MOUSE_BUTTON_DOWN:
-                    clickedPos = Position(e.button.x / 50, e.button.y / 50);           
+                    clickedPos = Position((int)e.button.x / 50, (int)e.button.y / 50);           
                     break;
             }
         }
@@ -80,7 +81,7 @@ public:
             drawCircle(_width/2*50, _height/2*50, 150, renderer);
             SDL_RenderPresent(renderer);
 
-            SDL_Delay(2500);
+            SDL_Delay(3500);
         }
         else
         {
@@ -88,7 +89,7 @@ public:
             drawCircle(_width/2*50, _height/2*50, 150, renderer);
             SDL_RenderPresent(renderer);
 
-            SDL_Delay(2500);
+            SDL_Delay(3500);
         }
     }
 
@@ -113,9 +114,9 @@ public:
                 int yc = yy;
         
                 float r = i/360.0f*2*3.14159f;                                 
-                int x = xc + radius * cos(r);
-                int y = yc + radius * sin(r);
-                SDL_RenderPoint(renderer, x, y);
+                int x = xc + (int)(radius * cos(r));
+                int y = yc + (int)(radius * sin(r));
+                SDL_RenderPoint(renderer, (float)x, (float)y);
             }
         }
 
@@ -128,8 +129,8 @@ public:
                     SDL_FRect rect;
                     rect.h = 50;
                     rect.w = 50;
-                    rect.x = j * 50;
-                    rect.y = i * 50;
+                    rect.x = (float)(j * 50);
+                    rect.y = (float)(i * 50);
 
                     SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
                     SDL_RenderRect(renderer, &rect);

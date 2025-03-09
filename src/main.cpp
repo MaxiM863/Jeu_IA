@@ -1,6 +1,7 @@
 #include "GraphiqueSDL.h"
 #include "tests_minMaxAlgo.h"
 #include <time.h>
+#include <random>
 
 #define BOARDSIZE 6
 #define DIFFICULTY 3
@@ -32,7 +33,7 @@ int main(int argc, char *argv[]){
 
     bool plyHasPlayed = false;
 
-    srand(time(0));
+    srand((unsigned)time(0));
 
     Position pos = Position(rand()%BOARDSIZE, rand()%BOARDSIZE);
     
@@ -125,7 +126,9 @@ int main(int argc, char *argv[]){
                     }
                 }                
             }
-        }        
+        }    
+        
+        if(botPos.size() + plyPos.size() == BOARDSIZE*BOARDSIZE) jeuActif = false;
     }
 
     return 0;
