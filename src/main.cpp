@@ -1,6 +1,7 @@
 #include "GraphiqueSDL.h"
 #include "tests_minMaxAlgo.h"
 #include <time.h>
+#include <random>
 
 #define BOARDSIZE 6
 #define DIFFICULTY 3
