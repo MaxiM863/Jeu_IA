@@ -23,6 +23,7 @@ Dans le cadre de ma recherche d'emplois de 2025, suite à ma diplômation.
 ### Compiler le code
 
 "cmake .." Dans le répertoire build qu'il faut créer
+
 "cmake --build ."  Dans le répertoire build, l'exécutable se trouvera dans le répertoire build/
 
 ### Run program
