@@ -26,7 +26,7 @@ Position MinMaxAlgo::minMaxRun(Tree* tree, std::vector<Position> botPlayed, std:
 {
     TreeNode* tmpNode = tree->getTopTree();
 
-    runAlgo(tmpNode, tree->getTreeDepth(), true, INT32_MIN, INT32_MAX, botPlayed, plyPlayed);
+    runAlgo(tmpNode, tree->getTreeDepth(), true, INT32_MIN, INT32_MAX, botPlayed, plyPlayed, 16, 0);
 
     return tmpNode->childs.at(tmpNode->valeurChild)->positionBoard;
 }
@@ -49,7 +49,7 @@ bool MinMaxAlgo::isFinished(std::vector<Position> Played)
     return result;
 }
 
-long MinMaxAlgo::runAlgo(TreeNode* node, int depth, bool isMaximizing, long alpha, long beta, std::vector<Position> botPlayed, std::vector<Position> plyPlayed)
+long MinMaxAlgo::runAlgo(TreeNode* node, int depth, bool isMaximizing, long alpha, long beta, std::vector<Position> botPlayed, std::vector<Position> plyPlayed, int granularite, int levelThreads)
 {
     if(node->parent != nullptr)
     {
@@ -82,9 +82,16 @@ long MinMaxAlgo::runAlgo(TreeNode* node, int depth, bool isMaximizing, long alph
     {
         long max_eval = INT32_MIN;
 
-        for(int i = 0; i < node->childs.size(); i++)
+        if(node->parent == nullptr)
         {
-            long eval = MinMaxAlgo::runAlgo(node->childs.at(i), depth - 1, false, alpha, beta, botPlayed, plyPlayed);
+            for(int i = 0; i < node->childs.size(); i++)
+            {
+                long eval;
+
+                
+                
+
+                eval = MinMaxAlgo::runAlgo(node->childs.at(i), depth - 1, false, alpha, beta, botPlayed, plyPlayed, granularite, levelThreads+1);         
 
             if(max_eval < eval) 
             {
@@ -97,10 +104,10 @@ long MinMaxAlgo::runAlgo(TreeNode* node, int depth, bool isMaximizing, long alph
             if(beta <= alpha)
             {
                 break;
-            }                
+            }
+            
+            return max_eval;
         }
-
-        return max_eval;
     }
     else
     {
@@ -108,7 +115,7 @@ long MinMaxAlgo::runAlgo(TreeNode* node, int depth, bool isMaximizing, long alph
 
         for(int i = 0; i < node->childs.size(); i++)
         {
-            long eval = MinMaxAlgo::runAlgo(node->childs.at(i), depth - 1, true, alpha, beta, botPlayed, plyPlayed);
+            long eval = MinMaxAlgo::runAlgo(node->childs.at(i), depth - 1, true, alpha, beta, botPlayed, plyPlayed, granularite, levelThreads+1);
 
             if(min_eval > eval) 
             {
@@ -125,8 +132,10 @@ long MinMaxAlgo::runAlgo(TreeNode* node, int depth, bool isMaximizing, long alph
         }
 
         return min_eval;
-    }
+    }    
 }
+
+
 
 long MinMaxAlgo::utilityFunction(TreeNode* node, std::vector<Position> Played, bool isMaximizing, bool isBot)
 {
