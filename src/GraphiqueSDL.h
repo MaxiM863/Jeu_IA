@@ -54,7 +54,7 @@ public:
                     return false;
                     break;
                 case SDL_EVENT_MOUSE_BUTTON_DOWN:
-                    clickedPos = Position(e.button.x / 50, e.button.y / 50);           
+                    clickedPos = Position((int)e.button.x / 50, (int)e.button.y / 50);           
                     break;
             }
         }
@@ -114,9 +114,9 @@ public:
                 int yc = yy;
         
                 float r = i/360.0f*2*3.14159f;                                 
-                int x = xc + radius * cos(r);
-                int y = yc + radius * sin(r);
-                SDL_RenderPoint(renderer, x, y);
+                int x = xc + (int)(radius * cos(r));
+                int y = yc + (int)(radius * sin(r));
+                SDL_RenderPoint(renderer, (float)x, (float)y);
             }
         }
 

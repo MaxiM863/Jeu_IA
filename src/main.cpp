@@ -33,7 +33,8 @@ int main(int argc, char *argv[]){
 
     bool plyHasPlayed = false;
 
-    srand(time(0));
+    time_t timei = 0;
+    srand(time(&timei));
 
     Position pos = Position(rand()%BOARDSIZE, rand()%BOARDSIZE);
     
