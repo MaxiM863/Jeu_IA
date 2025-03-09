@@ -1,6 +1,7 @@
 #include "GraphiqueSDL.h"
 #include "tests_minMaxAlgo.h"
 
+
 int main(int argc, char *argv[]){
 
     if(argc > 1)
@@ -23,12 +24,10 @@ int main(int argc, char *argv[]){
 
     MinMaxAlgo algo;
 
-    Tree tree(6);
-
     std::vector<Position> botPos;
     std::vector<Position> plyPos;
 
-    bool plyHasPlayed = false;
+    bool plyHasPlayed = true;
 
     while(jeuActif)
     {
@@ -36,10 +35,23 @@ int main(int argc, char *argv[]){
         if(plyHasPlayed)
         {
             plyHasPlayed = false;
-            
+
+            Tree tree(6);
+
+            tree.addLevel(botPos, plyPos);
+            tree.addLevel(botPos, plyPos);
+            tree.addLevel(botPos, plyPos);
+            tree.addLevel(botPos, plyPos);
+
             Position pos = algo.minMaxRun(&tree, botPos, plyPos);
             
             botPos.push_back(pos);
+
+            Position clickedPos(-1, -1);
+
+            GraphiqueSDL::afficherUnFrame(clickedPos);
+
+            GraphiqueSDL::putBotData(pos);
         }
         else
         {
@@ -50,6 +62,10 @@ int main(int argc, char *argv[]){
             if(clickedPos.xPos != -1)
             {
                 plyHasPlayed = true;
+
+                plyPos.push_back(clickedPos);
+
+                GraphiqueSDL::putPlayerData(clickedPos);
             }
         }        
     }

@@ -156,6 +156,9 @@ long MinMaxAlgo::utilityFunction(TreeNode* node, std::vector<Position> Played, b
         recursiveDirection(++hits, Played.at(i), Position(1, 1), Played);
         points += calculatePoints(hits);
         hits = 0;
+        recursiveDirection(++hits, Played.at(i), Position(1, -1), Played);
+        points += calculatePoints(hits);
+        hits = 0;
     }
 
     return points;

@@ -53,7 +53,7 @@ public:
                     return false;
                     break;
                 case SDL_EVENT_MOUSE_BUTTON_DOWN:
-                    clickedPos = Position(e.button.x / (_width/50), e.button.y / (_height/50));           
+                    clickedPos = Position(e.button.x / 50, e.button.y / 50);           
                     break;
             }
         }
@@ -101,9 +101,9 @@ public:
 
         static void drawBoard(SDL_Renderer *renderer)
         {            
-            for(int i = 0;  i < 6; i++) {
+            for(int i = 0;  i < _width; i++) {
 
-                for(int j = 0; j < 6; j++) {
+                for(int j = 0; j < _height; j++) {
 
                     SDL_FRect rect;
                     rect.h = 50;
@@ -116,9 +116,9 @@ public:
 
                     bool testBot = false;
 
-                    for(int i = 0; i < botPlayed.size(); i++)
+                    for(int k = 0; k < botPlayed.size(); k++)
                     {
-                        if(botPlayed.at(i).xPos == i && botPlayed.at(i).yPos == j)
+                        if(botPlayed.at(k).xPos == i && botPlayed.at(k).yPos == j)
                         {
                             testBot = true;
                         }
@@ -132,9 +132,9 @@ public:
                     
                     bool testPly = false;
 
-                    for(int i = 0; i < joueurPlayed.size(); i++)
+                    for(int k = 0; k < joueurPlayed.size(); k++)
                     {
-                        if(joueurPlayed.at(i).xPos == i && joueurPlayed.at(i).yPos == j)
+                        if(joueurPlayed.at(k).xPos == i && joueurPlayed.at(k).yPos == j)
                         {
                             testPly = true;
                         }
@@ -155,9 +155,9 @@ public:
         static inline SDL_Window *window;
         static inline SDL_Renderer *renderer;
 
-        static std::vector<Position> botPlayed;
-        static std::vector<Position> joueurPlayed;
+        static inline std::vector<Position> botPlayed;
+        static inline std::vector<Position> joueurPlayed;
 
-        static int _width;
-        static int _height;
+        static inline int _width;
+        static inline int _height;
 };
