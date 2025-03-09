@@ -72,6 +72,26 @@ public:
         return true;
     }
 
+    static void afficherFin(bool isBotWin)
+    {
+        if(isBotWin)
+        {
+            SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+            drawCircle(_width/2*50, _height/2*50, 150, renderer);
+            SDL_RenderPresent(renderer);
+
+            SDL_Delay(2500);
+        }
+        else
+        {
+            SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+            drawCircle(_width/2*50, _height/2*50, 150, renderer);
+            SDL_RenderPresent(renderer);
+
+            SDL_Delay(2500);
+        }
+    }
+
     static void putBotData(Position bot)
     {
 

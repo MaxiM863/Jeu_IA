@@ -1,6 +1,7 @@
 #include "GraphiqueSDL.h"
 #include "tests_minMaxAlgo.h"
 
+#define BOARDSIZE 8
 
 int main(int argc, char *argv[]){
 
@@ -15,7 +16,7 @@ int main(int argc, char *argv[]){
         return 1;
     }
 
-    if(!GraphiqueSDL::initialize(6, 6))
+    if(!GraphiqueSDL::initialize(BOARDSIZE, BOARDSIZE))
     {
         return 1;
     }
@@ -29,6 +30,15 @@ int main(int argc, char *argv[]){
 
     bool plyHasPlayed = true;
 
+    int difficulty = 1;
+
+    bool selection = true;
+
+    while(selection)
+    {
+        
+    }
+
     while(jeuActif)
     {
 
@@ -36,12 +46,12 @@ int main(int argc, char *argv[]){
         {
             plyHasPlayed = false;
 
-            Tree tree(6);
+            Tree tree(BOARDSIZE);
 
-            tree.addLevel(botPos, plyPos);
-            tree.addLevel(botPos, plyPos);
-            tree.addLevel(botPos, plyPos);
-            tree.addLevel(botPos, plyPos);
+            for(int i = 0; i <= dificulty; i++)
+            {
+                tree.addLevel(botPos, plyPos);
+            }
 
             Position pos = algo.minMaxRun(&tree, botPos, plyPos);
             
@@ -52,6 +62,13 @@ int main(int argc, char *argv[]){
             GraphiqueSDL::afficherUnFrame(clickedPos);
 
             GraphiqueSDL::putBotData(pos);
+
+            if(algo.isFinished(botPos))
+            {
+
+                jeuActif = false;
+                GraphiqueSDL::afficherFin(true);
+            }
         }
         else
         {
@@ -66,6 +83,12 @@ int main(int argc, char *argv[]){
                 plyPos.push_back(clickedPos);
 
                 GraphiqueSDL::putPlayerData(clickedPos);
+
+                if(algo.isFinished(plyPos)) 
+                {
+                    jeuActif = false;
+                    GraphiqueSDL::afficherFin(false);
+                }
             }
         }        
     }

@@ -1,6 +1,6 @@
 #include "Tree.h"
 
-#define MAXHITS 4
+#define MAXHITS 5
 
 class MinMaxAlgo {
 
@@ -18,6 +18,8 @@ public:
     void SetDataTree(Tree* treeData);
 
     long testUtility(TreeNode* node, std::vector<Position> played);
+
+    bool isFinished(std::vector<Position> Played);
 
 private:
 

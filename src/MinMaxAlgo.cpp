@@ -40,6 +40,15 @@ long MinMaxAlgo::testUtility(TreeNode *node, std::vector<Position> played)
     return MinMaxAlgo::utilityFunction(node, played, true, true);
 }
 
+bool MinMaxAlgo::isFinished(std::vector<Position> Played)
+{
+    bool result = false;
+
+    if(MinMaxAlgo::isTerminal(MinMaxAlgo::utilityFunction(nullptr, Played, true, true))) result = true; 
+    
+    return result;
+}
+
 long MinMaxAlgo::runAlgo(TreeNode* node, int depth, bool isMaximizing, long alpha, long beta, std::vector<Position> botPlayed, std::vector<Position> plyPlayed)
 {
     if(node->parent != nullptr)
