@@ -3,5 +3,8 @@
         "args": [
             
         ]
+    },
+    "files.associations": {
+        "vector": "cpp"
     }
 }

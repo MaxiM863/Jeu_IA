@@ -1,7 +1,8 @@
 #include "GraphiqueSDL.h"
 #include "tests_minMaxAlgo.h"
 
-#define BOARDSIZE 8
+#define BOARDSIZE 10
+#define DIFFICULTY 2
 
 int main(int argc, char *argv[]){
 
@@ -30,15 +31,6 @@ int main(int argc, char *argv[]){
 
     bool plyHasPlayed = true;
 
-    int difficulty = 1;
-
-    bool selection = true;
-
-    while(selection)
-    {
-        
-    }
-
     while(jeuActif)
     {
 
@@ -48,7 +40,7 @@ int main(int argc, char *argv[]){
 
             Tree tree(BOARDSIZE);
 
-            for(int i = 0; i <= dificulty; i++)
+            for(int i = 0; i <= DIFFICULTY; i++)
             {
                 tree.addLevel(botPos, plyPos);
             }
@@ -78,17 +70,40 @@ int main(int argc, char *argv[]){
 
             if(clickedPos.xPos != -1)
             {
-                plyHasPlayed = true;
+                bool testPresent = false;
 
-                plyPos.push_back(clickedPos);
-
-                GraphiqueSDL::putPlayerData(clickedPos);
-
-                if(algo.isFinished(plyPos)) 
+                for(int i = 0; i < botPos.size(); i++)
                 {
-                    jeuActif = false;
-                    GraphiqueSDL::afficherFin(false);
+                    if(botPos.at(i).xPos == clickedPos.xPos && botPos.at(i).yPos == clickedPos.yPos)
+                    {
+                        testPresent = true;
+                        break;
+                    }
                 }
+
+                for(int i = 0; i < plyPos.size(); i++)
+                {
+                    if(plyPos.at(i).xPos == clickedPos.xPos && plyPos.at(i).yPos == clickedPos.yPos)
+                    {
+                        testPresent = true;
+                        break;
+                    }
+                }
+
+                if(!testPresent)
+                {
+                    plyHasPlayed = true;
+
+                    plyPos.push_back(clickedPos);
+
+                    GraphiqueSDL::putPlayerData(clickedPos);
+
+                    if(algo.isFinished(plyPos)) 
+                    {
+                        jeuActif = false;
+                        GraphiqueSDL::afficherFin(false);
+                    }
+                }                
             }
         }        
     }
