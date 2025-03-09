@@ -51,101 +51,32 @@ bool MinMaxAlgo::isFinished(std::vector<Position> Played)
 }
 
 void MinMaxAlgo::func(long* p, int i, TreeNode* node, int depth, bool isMaximizing, long alpha, long beta, std::vector<Position> botPlayed, std::vector<Position> plyPlayed) {
-    
-    if(node->parent != nullptr)
+          
+    long min_eval = INT32_MAX;
+
+    for(int i = 0; i < node->childs.size(); i++)
     {
-        long botPoints;
-        long plyPoints;
+        long eval = MinMaxAlgo::runAlgo(node->childs.at(i), depth - 1, true, alpha, beta, botPlayed, plyPlayed);
 
-        if(!isMaximizing)
+        if(min_eval > eval) 
         {
-            botPoints = MinMaxAlgo::utilityFunction(node, botPlayed, !isMaximizing, true);
-            plyPoints = MinMaxAlgo::utilityFunction(nullptr, plyPlayed, !isMaximizing, false);
-            
-            if(isTerminal(botPoints) || depth == 0)
-            {
-                mtx.lock();
-                p[i] = (botPoints - plyPoints);
-                mtx.unlock();
+            min_eval = eval;
+            node->valeurChild = i;
+        }  
 
-                return;
-            }
-        }
-        else
-        {
-            botPoints = MinMaxAlgo::utilityFunction(nullptr, botPlayed, !isMaximizing, true);
-            plyPoints = MinMaxAlgo::utilityFunction(node, plyPlayed, !isMaximizing, false);
-            
-            if(isTerminal(plyPoints) || depth == 0)
-            {
-                mtx.lock();
-                p[i] = (botPoints - plyPoints);
-                mtx.unlock();
-
-                return;
-            }
-        }       
-    }
+        beta = std::min(beta, eval);
         
-    if(isMaximizing)
-    {
-        long max_eval = INT32_MIN;
-
-
-        for(int i = 0; i < node->childs.size(); i++)
+        if(beta <= alpha)
         {
-            long eval;
-
-            eval = MinMaxAlgo::runAlgo(node->childs.at(i), depth - 1, false, alpha, beta, botPlayed, plyPlayed);
-            
-            if(max_eval < eval) 
-            {
-                max_eval = eval;
-                node->valeurChild = i;
-            }         
-
-            alpha = std::max(alpha, eval);
-            
-            if(beta <= alpha)
-            {
-                break;
-            }                
-        }
-
-        mtx.lock();
-        p[i] = max_eval;
-        mtx.unlock();
-
-        return;
+            break;
+        }                
     }
-    else
-    {
-        long min_eval = INT32_MAX;
 
-        for(int i = 0; i < node->childs.size(); i++)
-        {
-            long eval = MinMaxAlgo::runAlgo(node->childs.at(i), depth - 1, true, alpha, beta, botPlayed, plyPlayed);
+    mtx.lock();
+    p[i] = min_eval;
+    mtx.unlock();
 
-            if(min_eval > eval) 
-            {
-                min_eval = eval;
-                node->valeurChild = i;
-            }  
-
-            beta = std::min(beta, eval);
-            
-            if(beta <= alpha)
-            {
-                break;
-            }                
-        }
-
-        mtx.lock();
-        p[i] = min_eval;
-        mtx.unlock();
-
-        return;
-    }
+    return;    
 }
 
 long MinMaxAlgo::runAlgo(TreeNode* node, int depth, bool isMaximizing, long alpha, long beta, std::vector<Position> botPlayed, std::vector<Position> plyPlayed)
@@ -186,7 +117,7 @@ long MinMaxAlgo::runAlgo(TreeNode* node, int depth, bool isMaximizing, long alph
         {
             long eval;
 
-            if(false)
+            if(node->parent == nullptr)
             {
                 std::thread* t = new std::thread[node->childs.size()];
 
