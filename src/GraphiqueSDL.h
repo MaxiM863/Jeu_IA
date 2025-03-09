@@ -129,8 +129,8 @@ public:
                     SDL_FRect rect;
                     rect.h = 50;
                     rect.w = 50;
-                    rect.x = j * 50;
-                    rect.y = i * 50;
+                    rect.x = (float)(j * 50);
+                    rect.y = (float)(i * 50);
 
                     SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
                     SDL_RenderRect(renderer, &rect);
