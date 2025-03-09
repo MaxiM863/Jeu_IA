@@ -11,6 +11,7 @@ Dans le cadre de ma recherche d'emplois de 2025, suite à ma diplômation.
 ### Bugs
 
 #### Quand l'IA a perdu il ne joue pas de façon optimal
+#### Quand l'IA peut gagner avec certitude dans 2, il préfère à 1
 
 ## Visuels
 

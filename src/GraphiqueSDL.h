@@ -80,7 +80,7 @@ public:
             drawCircle(_width/2*50, _height/2*50, 150, renderer);
             SDL_RenderPresent(renderer);
 
-            SDL_Delay(2500);
+            SDL_Delay(3500);
         }
         else
         {
@@ -88,7 +88,7 @@ public:
             drawCircle(_width/2*50, _height/2*50, 150, renderer);
             SDL_RenderPresent(renderer);
 
-            SDL_Delay(2500);
+            SDL_Delay(3500);
         }
     }
 

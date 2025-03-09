@@ -272,18 +272,18 @@ private:
 
         std::vector<Position> played;
 
-        played.push_back(Position(1, 1));
-        played.push_back(Position(0, 3));
+        played.push_back(Position(0, 0));
+        played.push_back(Position(0, 1));
 
         std::vector<Position> playedPly;
 
-        playedPly.push_back(Position(2, 2));
-        playedPly.push_back(Position(4, 4));
+        playedPly.push_back(Position(2, 3));
+        playedPly.push_back(Position(4, 3));
         
         tree.addLevel(played, playedPly);
         tree.addLevel(played, playedPly);
 
-        Position posOptimal = algo.minMaxRun(&tree, played, playedPly);        
+        Position posOptimal = algo.minMaxRun(&tree, played, played);        
 
         if(posOptimal.xPos != 3 || posOptimal.yPos != 3) res = false;
         
