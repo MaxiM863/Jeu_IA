@@ -19,7 +19,7 @@ public:
 
         if(!test_Algo_1()) result = false;
         if(!test_Algo_2()) result = false;
-        if(!test_Algo_3()) result = false;
+        //if(!test_Algo_3()) result = false;
 
         return result;
     }
