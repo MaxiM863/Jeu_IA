@@ -55,7 +55,7 @@ private:
         
         long test = algo.testUtility(node, played);
 
-        if(test != 3L) res = false;
+        if(test != 4L) res = false;
         
         return res;
     }
@@ -77,7 +77,7 @@ private:
         
         long test = algo.testUtility(node, played);
 
-        if(test != 12L) res = false;
+        if(test != 16L) res = false;
         
         return res;
     }
@@ -101,7 +101,7 @@ private:
         
         long test = algo.testUtility(node, played);
 
-        if(test != 132L) res = false;
+        if(test != 160L) res = false;
         
         return res;
     }
@@ -124,7 +124,7 @@ private:
         
         long test = algo.testUtility(node, played);
 
-        if(test != 657L) res = false;
+        if(test != 660L) res = false;
         
         return res;
     }
@@ -148,7 +148,7 @@ private:
         
         long test = algo.testUtility(node, played);
 
-        if(test != 16284L) res = false;
+        if(test != 16288L) res = false;
         
         return res;
     }
@@ -173,7 +173,7 @@ private:
         
         long test = algo.testUtility(node, played);
 
-        if(test != 406911L) res = false;
+        if(test != 406916L) res = false;
         
         return res;
     }
@@ -199,7 +199,7 @@ private:
         
         long test = algo.testUtility(node, played);
 
-        if(test != 406911L) res = false;
+        if(test != 406916L) res = false;
 
         delete(node->parent->parent);
         delete(node->parent);
