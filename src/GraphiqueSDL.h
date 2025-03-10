@@ -67,10 +67,22 @@ public:
         drawBoard(renderer);
 
         //**************************************************************
-        
-        SDL_RenderPresent(renderer);
 
         return true;
+    }
+
+    static void terminerFrame()
+    {
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        SDL_RenderClear(renderer);
+
+        //**************************************************************
+
+        drawBoard(renderer);
+
+        //**************************************************************
+        
+        SDL_RenderPresent(renderer);
     }
 
     static void afficherFin(bool isBotWin)

@@ -117,7 +117,7 @@ int main(int argc, char *argv[]){
 
                     plyPos.push_back(clickedPos);
 
-                    GraphiqueSDL::putPlayerData(clickedPos);
+                    GraphiqueSDL::putPlayerData(clickedPos);                    
 
                     if(algo.isFinished(plyPos)) 
                     {
@@ -127,6 +127,8 @@ int main(int argc, char *argv[]){
                 }                
             }
         }    
+
+        GraphiqueSDL::terminerFrame();
         
         if(botPos.size() + plyPos.size() == BOARDSIZE*BOARDSIZE) jeuActif = false;
     }
