@@ -7,7 +7,6 @@ class MinMaxAlgo {
 public:
 
     MinMaxAlgo();
-    MinMaxAlgo(Tree* treeData);
     ~MinMaxAlgo();
     MinMaxAlgo(MinMaxAlgo& copy);
 
@@ -31,8 +30,4 @@ private:
     void recursiveDirection(long& points, Position pos, Position direction, std::vector<Position> botPlayed);
 
     long calculatePoints(int hits);
-
-private:
-
-    Tree* tree;
 };

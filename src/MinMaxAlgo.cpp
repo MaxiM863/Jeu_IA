@@ -2,11 +2,6 @@
 
 #include "MinMaxAlgo.h"
 
-MinMaxAlgo::MinMaxAlgo(Tree* treeData)
-{
-    MinMaxAlgo::SetDataTree(treeData);
-}
-
 MinMaxAlgo::MinMaxAlgo()
 {
 

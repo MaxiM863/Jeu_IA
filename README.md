@@ -18,7 +18,7 @@ Dans le cadre de ma recherche d'emplois de 2025, suite à ma diplômation.
 
 ![](PlantUML/UseSase.png)
 ---
-![](PlantUML/ClassDiagram.png)
+![](PlantUML/ClassDiagram2.png)
 
 ## Usage
 
