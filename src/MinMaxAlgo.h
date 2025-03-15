@@ -4,6 +4,7 @@
 #include "Tree.h"
 
 #define MAXHITS 4
+#define MAXTHREADS 8
 
 class MinMaxAlgo {
 
@@ -26,7 +27,7 @@ public:
     
     long runAlgo(TreeNode* node, int depth, bool isMaximizing, long alpha, long beta, std::vector<Position> botPlayed, std::vector<Position> plyPlayed);
      
-    void func(long* p, int i, TreeNode* node, int depth, bool isMaximizing, long alpha, long beta, std::vector<Position> botPlayed, std::vector<Position> plyPlayed);
+    void func(long* p, int i, int t, TreeNode* node, int depth, bool isMaximizing, long alpha, long beta, std::vector<Position> botPlayed, std::vector<Position> plyPlayed);
 
 private:
 
