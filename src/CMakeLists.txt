@@ -19,7 +19,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(Boost)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE SDL3::SDL3 Boost::filesystem Boost::system Boost::thread)
+target_link_libraries(${PROJECT_NAME} PRIVATE SDL3::SDL3 Boost::filesystem Boost::system Boost::thread Boost::asio)
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../vendor/SDL-main/SDL/include)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../tests)

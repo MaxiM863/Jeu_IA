@@ -1,4 +1,4 @@
-#include<boost/thread.hpp>
+#include "boost/thread.hpp"
 
 #include "TreeNode.h"
 
@@ -21,8 +21,6 @@ class Tree {
 
             TreeNode* actual = top;
             int level = 0;
-
-            boost::thread* t = new boost::thread[size];
 
             if(actual->childsCount == 0)
             {
@@ -74,17 +72,19 @@ class Tree {
                         {
                         
                             actual->childs[actual->childsCount++] = (new TreeNode(actual, boardSize * boardSize - plyPlayed.size() - botPlayed.size(), Position(i, j)));
-                            
-                            t[i] = boost::thread(&Tree::recursiveAddNode, this, boost::ref(actual->childs[actual->childsCount-1]), 1, bot, ply, difficulty);
                         }
                     }
                 }
-            }           
+            }
+
+            boost::thread* t = new boost::thread[size];
 
             for(int i = 0; i < size; i++)
             {
-                t[i].join();
+                t[i] = boost::thread(&Tree::recursiveAddNode, this, boost::ref(top->childs[i]), 0, bot, ply, difficulty);
             }
+
+            for(int i =0; i < size; i++) t[i].join();
         }
 
         int getTreeDepth() 

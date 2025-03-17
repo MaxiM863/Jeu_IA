@@ -5,6 +5,8 @@
         ]
     },
     "files.associations": {
-        "vector": "cpp"
+        "vector": "cpp",
+        "random": "cpp",
+        "*.ipp": "cpp"
     }
 }
