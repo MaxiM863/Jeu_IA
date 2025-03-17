@@ -15,16 +15,18 @@ struct Position
 struct TreeNode
 {
     TreeNode(){}
-    TreeNode(TreeNode* _parent, std::vector<TreeNode*> _childs, Position position)
+    TreeNode(TreeNode* _parent, int nbrChilds, Position position)
     {
         parent = _parent;
-        childs = _childs;
+        childs = new TreeNode*[nbrChilds];
         positionBoard = position;
         valeurChild = 0;
     }
 
     TreeNode* parent;
-    std::vector<TreeNode*> childs;
+    TreeNode** childs;
+
+    int childsCount = 0;
 
     Position positionBoard;
 

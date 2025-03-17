@@ -4,7 +4,7 @@
 #include <random>
 
 #define BOARDSIZE 6
-#define DIFFICULTY 4
+#define DIFFICULTY 3
 
 int main(int argc, char *argv[]){
 
@@ -61,11 +61,8 @@ int main(int argc, char *argv[]){
 
             Tree tree(BOARDSIZE);
 
-            for(int i = 0; i <= DIFFICULTY; i++)
-            {
-                tree.addLevel(botPos, plyPos);
-            }
-
+            tree.addLevel(DIFFICULTY, botPos, plyPos);
+            
             Position pos = algo.minMaxRun(&tree, botPos, plyPos);
             
             botPos.push_back(pos);

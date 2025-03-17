@@ -184,7 +184,7 @@ private:
 
         bool res = true;
         
-        TreeNode* node = new TreeNode(nullptr, std::vector<TreeNode*>(), Position(5, 5));
+        TreeNode* node = new TreeNode(nullptr, 36, Position(5, 5));
 
         std::vector<Position> played;
 
@@ -192,8 +192,8 @@ private:
         played.push_back(Position(2, 2));
         played.push_back(Position(3, 3));
 
-        node->parent = new TreeNode(new TreeNode(new TreeNode(nullptr, std::vector<TreeNode*>(), Position(-1, -1)), 
-            std::vector<TreeNode*>(), Position(4, 4)), std::vector<TreeNode*>(), Position(4, 2));
+        node->parent = new TreeNode(new TreeNode(new TreeNode(nullptr, 36, Position(-1, -1)), 
+            36, Position(4, 4)), 36, Position(4, 2));
 
         // 390625*1 + 15625*1 + 625*1 + 25*1 + 4*2 + 3
         
@@ -226,7 +226,7 @@ private:
         playedPly.push_back(Position(0, 0));
         playedPly.push_back(Position(4, 4));
         
-        tree->addLevel(played, playedPly);
+        tree->addLevel(2, played, playedPly);
 
         Position posOptimal = algo.minMaxRun(tree, played, playedPly);        
 
@@ -253,8 +253,7 @@ private:
         playedPly.push_back(Position(2, 2));
         playedPly.push_back(Position(4, 4));
         
-        tree.addLevel(played, playedPly);
-        tree.addLevel(played, playedPly);
+        tree.addLevel(2, played, playedPly);
 
         Position posOptimal = algo.minMaxRun(&tree, played, playedPly);        
 
@@ -291,10 +290,7 @@ private:
         playedPly.push_back(Position(1, 2));
         playedPly.push_back(Position(3, 5));
         
-        tree.addLevel(played, playedPly);
-        tree.addLevel(played, playedPly);
-        tree.addLevel(played, playedPly);
-        tree.addLevel(played, playedPly);
+        tree.addLevel(4, played, playedPly);
 
         Position posOptimal = algo.minMaxRun(&tree, played, played);        
 

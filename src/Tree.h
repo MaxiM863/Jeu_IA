@@ -6,14 +6,14 @@ class Tree {
 
     public:
 
-        Tree(int boardSize) { top = new TreeNode(nullptr, std::vector<TreeNode*>(), Position(-1, -1)); this->boardSize = boardSize; }
+        Tree(int boardSize) { top = new TreeNode(nullptr, boardSize*boardSize, Position(-1, -1)); this->boardSize = boardSize; }
 
         TreeNode* getTopTree() { return top; }
 
-        void addLevel(std::vector<Position> botPlayed, std::vector<Position> plyPlayed)
+        void addLevel(int difficulty, std::vector<Position> bot, std::vector<Position> ply)
         {
-
-            recursiveAddNode(top, botPlayed, plyPlayed, 0);
+            
+            recursiveAddNode(top, 0, bot, ply, difficulty);
         }
 
         int getTreeDepth() 
@@ -31,18 +31,21 @@ class Tree {
         void recursiveLeaf(TreeNode* actual, int& count)
         {       
             
-            if(actual->childs.size() > 0)
+            if(actual->childsCount > 0)
             {
 
                 count++;
-                recursiveLeaf(actual->childs.at(0), count);                
+                recursiveLeaf(actual->childs[0], count);                
             }
         }
 
-        void recursiveAddNode(TreeNode* actual, std::vector<Position> botPlayed, std::vector<Position> plyPlayed, int level)
+        void recursiveAddNode(TreeNode* actual, int level, std::vector<Position> bot, std::vector<Position> ply, int difficulty)
         {
 
-            if(actual->childs.size() == 0)
+            std::vector<Position> plyPlayed = ply;
+            std::vector<Position> botPlayed = bot;
+
+            if(actual->childsCount == 0)
             {
 
                 TreeNode* tmpActual = actual;
@@ -91,16 +94,17 @@ class Tree {
                         if(!testExist)
                         {
                         
-                            actual->childs.push_back(new TreeNode(actual, std::vector<TreeNode*>(), Position(i, j)));
+                            actual->childs[actual->childsCount++] = (new TreeNode(actual, boardSize * boardSize - plyPlayed.size() - botPlayed.size(), Position(i, j)));
                         }
                     }
                 }
             }
-            else
+            
+            if(level < difficulty)
             {
-                for(int i = 0; i < actual->childs.size(); i++)
+                for(int i = 0; i < actual->childsCount; i++)
                 {
-                    recursiveAddNode(actual->childs.at(i), botPlayed, plyPlayed, level + 1);
+                    recursiveAddNode(actual->childs[i], level + 1, bot, ply, difficulty);
                 }
             }
         }
