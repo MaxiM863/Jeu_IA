@@ -3,8 +3,8 @@
 #include <time.h>
 #include <random>
 
-#define BOARDSIZE 6
-#define DIFFICULTY 4
+#define BOARDSIZE 4
+#define DIFFICULTY 7
 
 int main(int argc, char *argv[]){
 
