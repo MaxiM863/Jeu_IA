@@ -4,7 +4,7 @@
 #include <random>
 
 #define BOARDSIZE 6
-#define DIFFICULTY 2
+#define DIFFICULTY 3
 
 int main(int argc, char *argv[]){
 

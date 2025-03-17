@@ -75,6 +75,7 @@ long MinMaxAlgo::runAlgo(TreeNode* node, int depth, bool isMaximizing, long alph
         
     if(isMaximizing)
     {
+        
         long max_eval = INT32_MIN;
 
         for(int i = 0; i < node->childsCount; i++)

@@ -77,14 +77,11 @@ class Tree {
                 }
             }
 
-            boost::thread* t = new boost::thread[size];
-
             for(int i = 0; i < size; i++)
             {
-                t[i] = boost::thread(&Tree::recursiveAddNode, this, boost::ref(top->childs[i]), 0, bot, ply, difficulty);
+                recursiveAddNode(top->childs[i], 0, bot, ply, difficulty);
             }
 
-            for(int i =0; i < size; i++) t[i].join();
         }
 
         int getTreeDepth() 
