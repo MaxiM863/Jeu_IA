@@ -1,4 +1,5 @@
 #include<stdint.h>
+#include"boost/asio.hpp"
 
 #include "MinMaxAlgo.h"
 
@@ -80,7 +81,36 @@ long MinMaxAlgo::runAlgo(TreeNode* node, int depth, bool isMaximizing, long alph
 
         for(int i = 0; i < node->childsCount; i++)
         {
-            long eval = MinMaxAlgo::runAlgo(node->childs[i], depth - 1, false, alpha, beta, botPlayed, plyPlayed);
+            long eval = INT32_MAX;
+            
+            if(node->parent == nullptr)
+            {
+                boost::asio::thread_pool pool(8);
+
+                long* p = new long[node->childsCount];
+
+                for(int i = 0; i < node->childsCount; i++)
+                {
+                    TreeNode* tmpNN = node->childs[i];
+
+                    boost::asio::post(pool,[this, tmpNN, depth, alpha, beta, botPlayed, plyPlayed]{
+
+                        MinMaxAlgo::runAlgo(tmpNN, depth-1, false, alpha, beta, botPlayed, plyPlayed);
+                    });
+                }
+
+                pool.join();
+                
+                for(int i = 0; i < node->childsCount; i++)
+                {
+                    long tmpT = p[i];
+                    if(tmpT > max_eval) max_eval = tmpT;
+                }               
+                
+                return max_eval;
+            }
+            
+            eval = MinMaxAlgo::runAlgo(node->childs[i], depth - 1, false, alpha, beta, botPlayed, plyPlayed);
 
             if(max_eval < eval) 
             {
