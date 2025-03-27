@@ -8,7 +8,3 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 add_subdirectory(src)
 add_subdirectory(tests)
-
-enable_testing()
-
-add_test(NAME Utility COMMAND ${PROJECT_NAME} tests)
