@@ -3,7 +3,7 @@
 ## Description
 
 ### Jeu IA
-Ce jeu de table a pour objectif d'obtenir 4 marqueurs de suite tout en empêchant l'adversaire d'y parvenir.
+Ce jeu de table a pour objectif d'obtenir plusieurs marqueurs de suite tout en empêchant l'adversaire d'y parvenir.
 
 ### Contexte
 Dans le cadre de ma recherche d'emplois de 2025, suite à ma diplômation.
