@@ -1,9 +1,13 @@
-#include "GraphiqueSDL.h"
-#include "tests_minMaxAlgo.h"
 #include <time.h>
 #include <random>
+#include <fstream>
+#include <string>
+#include <iostream>
 
-#define BOARDSIZE 6
+#include "GraphiqueSDL.h"
+#include "tests_minMaxAlgo.h"
+
+#define BOARDSIZE 8
 #define DIFFICULTY 3
 
 int main(int argc, char *argv[]){
@@ -36,6 +40,10 @@ int main(int argc, char *argv[]){
     srand((unsigned)time(0));
 
     Position pos = Position(rand()%BOARDSIZE, rand()%BOARDSIZE);
+
+    std::ofstream out("output.txt");    
+    
+    out << "played.push_back(Position(" << pos.xPos << "," << pos.yPos << "));\n";
     
     botPos.push_back(pos);
 
@@ -50,7 +58,7 @@ int main(int argc, char *argv[]){
 
         jeuActif = false;
         GraphiqueSDL::afficherFin(true);
-    }
+    }    
 
     while(jeuActif)
     {
@@ -69,6 +77,8 @@ int main(int argc, char *argv[]){
             Position pos = algo.minMaxRun(&tree, botPos, plyPos);
             
             botPos.push_back(pos);
+
+            out << "played.push_back(Position(" << pos.xPos << "," << pos.yPos << "));\n";
 
             Position clickedPos(-1, -1);
 
@@ -115,6 +125,11 @@ int main(int argc, char *argv[]){
                 {
                     plyHasPlayed = true;
 
+                    if(plyHasPlayed)
+                    {
+                        out << "playedPly.push_back(Position(" << clickedPos.xPos << "," << clickedPos.yPos << "));\n";
+                    }
+
                     plyPos.push_back(clickedPos);
 
                     GraphiqueSDL::putPlayerData(clickedPos);                    
@@ -129,9 +144,13 @@ int main(int argc, char *argv[]){
         }    
 
         GraphiqueSDL::terminerFrame();
+
         
+                
         if(botPos.size() + plyPos.size() == BOARDSIZE*BOARDSIZE) jeuActif = false;
     }
+    
+    out.close();
 
     return 0;
 }

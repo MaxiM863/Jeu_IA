@@ -19,7 +19,7 @@ public:
 
         if(!test_Algo_1()) result = false;
         if(!test_Algo_2()) result = false;
-        //if(!test_Algo_3()) result = false;
+        if(!test_Algo_3()) result = false;
 
         return result;
     }
@@ -271,25 +271,25 @@ private:
         
         Tree tree(6);
 
-        std::vector<Position> played;
-
-        played.push_back(Position(0, 0));
-        played.push_back(Position(0, 1));
-        played.push_back(Position(2, 0));
-        played.push_back(Position(3, 0));
-        played.push_back(Position(1, 3));
-        played.push_back(Position(2, 4));
-        played.push_back(Position(5, 5));
+        std::vector<Position> played;       
 
         std::vector<Position> playedPly;
 
-        playedPly.push_back(Position(0, 3));
-        playedPly.push_back(Position(1, 1));
-        playedPly.push_back(Position(2, 2));
-        playedPly.push_back(Position(3, 3));
-        playedPly.push_back(Position(2, 1));
-        playedPly.push_back(Position(1, 2));
-        playedPly.push_back(Position(3, 5));
+        playedPly.push_back(Position(2,1));
+        played.push_back(Position(0,3));
+        playedPly.push_back(Position(0,4));
+        played.push_back(Position(0,1));
+        playedPly.push_back(Position(0,0));
+        played.push_back(Position(2,3));
+        playedPly.push_back(Position(2,2));
+        played.push_back(Position(1,2));
+        playedPly.push_back(Position(3,4));
+        played.push_back(Position(1,3));
+        playedPly.push_back(Position(3,3));
+        played.push_back(Position(1,1));
+        playedPly.push_back(Position(1,4));
+        played.push_back(Position(2,4));
+        playedPly.push_back(Position(3,5));
         
         tree.addLevel(played, playedPly);
         tree.addLevel(played, playedPly);
@@ -298,8 +298,42 @@ private:
 
         Position posOptimal = algo.minMaxRun(&tree, played, played);        
 
-        if(posOptimal.xPos != 3 || posOptimal.yPos != 3) res = false;
+        if(posOptimal.xPos != 1 || posOptimal.yPos != 0) res = false;
         
         return res;
     }
+
+    bool test_Algo_4()
+    {
+        MinMaxAlgo algo;
+
+        bool res = true;
+        
+        Tree tree(6);
+
+        std::vector<Position> played;       
+
+        std::vector<Position> playedPly;
+
+        playedPly.push_back(Position(2,3));
+        played.push_back(Position(2,1));
+        playedPly.push_back(Position(4,3));
+        played.push_back(Position(3,3));
+        playedPly.push_back(Position(3,4));
+        played.push_back(Position(3,1));
+        playedPly.push_back(Position(3,0));
+        played.push_back(Position(1,1));
+        playedPly.push_back(Position(0,1));
+        
+        tree.addLevel(played, playedPly);
+        tree.addLevel(played, playedPly);
+        tree.addLevel(played, playedPly);
+        tree.addLevel(played, playedPly);
+
+        Position posOptimal = algo.minMaxRun(&tree, played, played);        
+
+        if(posOptimal.xPos != 1 || posOptimal.yPos != 0) res = false;
+        
+        return res;
+    }    
 };
