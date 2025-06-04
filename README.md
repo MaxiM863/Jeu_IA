@@ -22,6 +22,12 @@ Dans le cadre de ma recherche d'emplois de 2025, suite à ma diplômation.
 
 ## Usage
 
+### Prérequis
+
+- Git
+- Compilateur (Visual studio ou gcc)
+- CMake
+
 ### Compiler le code
 
 "cmake .." Dans le répertoire build qu'il faut créer
